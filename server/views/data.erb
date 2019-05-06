@@ -1,0 +1,99 @@
+var chart = c3.generate({
+  bindto: '#chart',
+  padding: {
+     right: 40
+  },
+    grid: {
+        x: {
+            show: true
+        },
+        y: {
+            show: true
+        }
+    },
+  data: {
+    x: 'x',
+    xFormat: '<%= format %>',
+    columns: [
+      ['x',
+      <% csv.each do |data| %>
+        '<%= Time.parse(data[0]).strftime(format) %>',
+      <% end %>
+      ],
+      ['CO2',
+      <% csv.each do |data| %>
+        <%= data[1] %>,
+      <% end %>
+      ],
+      ['Temperature',
+      <% csv.each do |data| %>
+        <%= data[2] %>,
+      <% end %>
+      ]
+    ],
+    axes: {
+      CO2: 'y',
+      Temperature: 'y2'
+    }
+  },
+  zoom: {
+    enabled: true,
+  },
+  size: {
+    height: 600
+  },
+
+  subchart: {
+    show: true,
+    size: {
+      height: 100
+    }
+  },
+  axis : {
+    y : {
+      tick: {
+        format: d3.format("")
+      }
+    },
+    y2: {
+      show: true,
+      tick: {
+        format: d3.format(".1f")
+      }
+    },
+    x : {
+      type : 'timeseries',
+      tick: {
+        multiline: true,
+        multilineMax: 2,
+        format: '<%= format %>',
+        culling: false,
+        rotate: 60
+      }
+    }
+  },
+  tooltip: {
+    format: {
+    //  title: function (d) { return 'Data ' + d; },
+      value: function (value, ratio, id) {
+        var format
+        if (id === 'CO2'){
+          format = d3.format(',');
+        } else if (id === 'Temperature') {
+          format = d3.format('.1f');
+        } else {
+          format = '';
+        }
+        return format(value);
+      }
+    }
+  }
+});
+
+setTimeout(function () {
+  chart.zoom(
+    ['<%= Time.parse(csv[-8][0]).strftime(format) %>',
+     '<%= Time.parse(csv[-1][0]).strftime(format) %>'
+    ]
+  );
+}, 0);
