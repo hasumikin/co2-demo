@@ -8,6 +8,7 @@ while true
   if co2 > 0
     data = "co2=#{co2}&temperature=#{temperature}"
     puts "DATASEND:#{data}"
+    debugprint("slave_loop", "debug")
     sleep 300
   else
     sleep 3
