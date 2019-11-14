@@ -7,7 +7,8 @@ FileUtils.touch(csvfile)
 
 filename = 'log.txt'
 
-ENV["TZ"] = "Europe/Warsaw" # 中央ヨーロッパ時間
+# ENV["TZ"] = "Europe/Warsaw" # 中央ヨーロッパ時間
+ENV["TZ"] = "America/Indiana/Knox" # CST
 
 File.open(filename) do |log|
   log.extend(File::Tail)

@@ -17,7 +17,7 @@
 
 // maximum number of VMs
 #if !defined(MAX_VM_COUNT)
-#define MAX_VM_COUNT 6
+#define MAX_VM_COUNT 5
 #endif
 
 // maximum size of registers
@@ -29,6 +29,10 @@
 #if !defined(MAX_SYMBOLS_COUNT)
 #define MAX_SYMBOLS_COUNT 300
 #endif
+
+// memory management
+//  MRBC_ALLOC_16BIT or MRBC_ALLOC_24BIT
+#define MRBC_ALLOC_16BIT
 
 
 /* Configure environment
@@ -42,7 +46,7 @@
 
 // Use math. Support Math class.
 #if !defined(MRBC_USE_MATH)
-#define MRBC_USE_MATH 1
+#define MRBC_USE_MATH 0
 #endif
 /* (NOTE)
    maybe you need

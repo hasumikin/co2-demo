@@ -14,8 +14,8 @@
 #include "models/thermistor.h"
 #include "models/led.h"
 #include "models/co2.h"
-#include "loops/master.h"
-#include "loops/slave.h"
+#include "loops/primary.h"
+#include "loops/secondary.h"
 
 #define DEFAULT_VREF    1100
 #define NO_OF_SAMPLES   64
@@ -146,8 +146,8 @@ void app_main(void) {
   mrbc_create_task( thermistor, 0 );
   mrbc_create_task( led, 0 );
   mrbc_create_task( co2, 0 );
-  mrbc_create_task( master, 0 );
-  mrbc_create_task( slave, 0 );
+  mrbc_create_task( primary, 0 );
+  mrbc_create_task( secondary, 0 );
   mrbc_run();
 }
 
